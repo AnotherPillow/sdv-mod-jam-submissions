@@ -1,0 +1,18 @@
+@import '@fontsource/ubuntu';
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.svoast-container .svoast-wrapper {
+    transform-origin: bottom right !important;
+}
+
+.svoast-container[data-position*="-left"][class*="svelte-"] {
+    left: auto !important;
+    right: 0 !important;
+    align-items: flex-end !important;
+
+    top: auto !important;
+    bottom: 2em !important;
+}
