@@ -70,14 +70,15 @@
         <br />
 
         <div class="row">
-            <label for="fileInput">Mod File (must be .zip): </label>
+            <label for="fileInput">Mod File (<a href="https://catbox.moe/" target="_blank">catbox.moe link</a>): </label>
             <input 
                 on:invalid={handleInvalidInput}
-                type="file" 
+                type="text" 
                 id="fileInput"
                 name="fileInput"
-                accept=".zip"
-                data-human-name="file upload area"
+                data-human-name="catbox.moe link field"
+                placeholder="https://catbox.moe/asdfgh.zip"
+                pattern="https:\/\/files\.catbox\.moe\/[A-Za-z0-9]+\.zip"
                 required
             />
         </div>
@@ -112,4 +113,7 @@
         margin-bottom: 0.5em;
     }
 
+    a {
+        color: rgb(167, 86, 164);
+    }
 </style>

@@ -21,9 +21,11 @@ export const actions = {
             .replace(/here/g, 'h***')
         const category = data.get('categorySelect')
         const notes = data.has('categoryInput') ? data.get('categoryInput') : 'No notes specified.'
-        const file = data.get('fileInput') as File;
+        const file = (data.get('fileInput') ?? '').toString();
 
-        if (file.type !== 'application/x-zip-compressed' || !file.name.endsWith('.zip')) return { success: false }
+        const catboxRegex = /^https\:\/\/files\.catbox\.moe\/[A-Za-z0-9]+\.zip$/
+
+        if (!catboxRegex.test(file)) return { success: false }
 
         console.log(
             name,
@@ -57,7 +59,6 @@ export const actions = {
         console.log(hook, categoryPretty)
 
         const avatar = host?.includes('localhost') ? 'https://i.imgur.com/EXm6MnT.png' : ('https://' + host + '/favicon.png')
-        const futureFileName = `${name}-${categoryPretty}-mod.zip`
 
         const embeds = [
             {
@@ -80,7 +81,7 @@ export const actions = {
                     },
                     {
                         name: '**Mod File**',
-                        value: `See ${futureFileName} in the next message.`,
+                        value: `[catbox link](${file})`,
                         inline: true,
                     },
                 ],
@@ -101,13 +102,6 @@ export const actions = {
             avatar_url: avatar,
         };
 
-        const discordForm = new FormData();
-        discordForm.append('file1', new Blob([file], { type: 'application/zip' }), futureFileName)
-        discordForm.append('content', `Here's the mod file for ${name}'s ${categoryPretty} mod.`)
-        discordForm.append('username', `New ${categoryPretty} Mod`)
-        discordForm.append('avatar_url', avatar)
-
-
         let submissionRes = await fetch(hook, {
             'method':'POST',
             'body': JSON.stringify(payload),
@@ -116,18 +110,12 @@ export const actions = {
             }
         })
 
-        let fileRes = await fetch(hook, {
-                'method':'POST',
-                'body': discordForm,
-            }
-        )
-
-        const success = [200, 204].includes(submissionRes.status) && [200, 204].includes(fileRes.status)
+        const _success = [200, 204].includes(submissionRes.status)
 
 
 
         return {
-            success,
+            success: _success,
         }
 	}
 };
