@@ -89,7 +89,7 @@ export const actions = {
                     url: avatar,
                 },
                 footer: {
-                    "text": `Submitted at ${(new Date()).getTime().toLocaleString()} UTC. Running on stardew.rocks`,
+                    "text": `Submitted at ${(new Date((new Date()).getTime())).toLocaleString()} UTC. Running on stardew.rocks`,
                     "icon_url": "https://avatars.githubusercontent.com/u/143358767"
                 }
             },
