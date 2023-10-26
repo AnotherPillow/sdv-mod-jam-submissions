@@ -89,14 +89,14 @@ export const actions = {
                     url: avatar,
                 },
                 footer: {
-                    "text": `Submitted at ${(new Date()).toLocaleString()} UTC. Running on stardew.rocks`,
+                    "text": `Submitted at ${(new Date()).getTime().toLocaleString()} UTC. Running on stardew.rocks`,
                     "icon_url": "https://avatars.githubusercontent.com/u/143358767"
                 }
             },
         ];
 
         const payload = {
-            content: `@${name}'s ${categoryPretty} Mod!`,
+            content: `@${name.split('\n')[0].trim()}'s ${categoryPretty} Mod!`,
             embeds: embeds,
             username: `New ${categoryPretty} Mod`,
             avatar_url: avatar,

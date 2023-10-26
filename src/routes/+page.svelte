@@ -31,9 +31,9 @@
     <form method="POST" enctype="multipart/form-data" >
         <div class="row">
             <label for="usernameInput">Discord Username(s): </label>
-            <input 
+            <br />
+            <textarea 
                 on:invalid={handleInvalidInput}
-                type="text" 
                 id="usernameInput"
                 name="usernameInput"
                 placeholder="mycooldiscordname"
@@ -57,9 +57,9 @@
         
         <div class="row">
             <label for="categoryInput">Any Notes?: </label>
-            <input 
+            <br />
+            <textarea 
                 on:invalid={handleInvalidInput}
-                type="text" 
                 id="categoryInput"
                 name="categoryInput"
                 placeholder="Requires x, y, z, ..."
@@ -95,7 +95,7 @@
 {/if}
 
 <style lang="scss">
-    input, select, button {
+    input, select, button, textarea {
         background-color: #222222;
         border-radius: 0.5em;
         color: white;
