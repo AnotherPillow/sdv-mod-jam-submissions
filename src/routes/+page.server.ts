@@ -7,9 +7,17 @@ import {
 import NodeFormData from 'form-data'
 import { Buffer } from 'buffer';
 
+const endUnix = 1698551940*1000
+
 /** @type {import('./$types').Actions} */
 export const actions = {
 	default: async (event) => {
+        const isOver = (new Date() as unknown as number) > endUnix
+        
+        if (isOver) return {
+            success: false,
+        }
+
 		const { fetch } = event;
         const host = event.request.headers.get('host')
         
